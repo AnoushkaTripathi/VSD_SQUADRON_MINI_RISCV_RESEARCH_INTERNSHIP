@@ -58,15 +58,11 @@ $ ls -ltr filename.o
 
 ## Step 5: Display Assembly Code
 
-Compile the C code with optimization flags:
-
-```
-$ riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o filename.o filename.c
 ```
 Display the optimized assembly code for the main function:
 
 ```
-$ riscv64-unknown-elf-objdump -d filename.o | less /main
+$ riscv64-unknown-elf-objdump -d filename.o | less
 ```
 
 ![image](https://github.com/user-attachments/assets/1f6443e6-c0cb-43b0-8a76-5777b7b6f82c)
