@@ -25,7 +25,7 @@ $ leafpad filename.c &
 
 ![image](https://github.com/user-attachments/assets/49f80e9e-9e0f-4c55-a526-99c0c40f35d7)
 
-## Step 4: Compile and Run the C Code
+## Step 3: Compile and Run the C Code
 Compile the C code:
 
 ```
@@ -42,10 +42,32 @@ $ ./a.out
 
 ![image](https://github.com/user-attachments/assets/6eff5a0a-2866-4957-9e52-5e87ac542cee)
 
+## Step 4: Compile C Code with RISC-V Compiler
+Compile the C code using the RISC-V compiler:
+
+```
+$ riscv64-unknown-elf-gcc -O1 -mabi=lp64 -march=rv64i -o filename.o filename.c
+```
+List the compiled object file:
+
+```
+$ ls -ltr filename.o
+```
 
 ![image](https://github.com/user-attachments/assets/8c8e3183-c3b2-4148-a11c-9c2a3f9c8cdd)
 
+## Step 5: Display Assembly Code
 
+Compile the C code with optimization flags:
+
+```
+$ riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o filename.o filename.c
+```
+Display the optimized assembly code for the main function:
+
+```
+$ riscv64-unknown-elf-objdump -d filename.o | less /main
+```
 
 ![image](https://github.com/user-attachments/assets/1f6443e6-c0cb-43b0-8a76-5777b7b6f82c)
 
