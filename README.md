@@ -73,6 +73,9 @@ $ riscv64-unknown-elf-objdump -d filename.o | less
 
 ![image](https://github.com/user-attachments/assets/5cac65e5-8930-4c1c-b95a-e39742d83a56)
 
+![image](https://github.com/user-attachments/assets/1dbd254a-c510-48a2-87cf-0b22c2790948)
+
+
 
 ![image](https://github.com/user-attachments/assets/a6f72964-0668-4ffd-9b9f-6b2087f36c01)
 
