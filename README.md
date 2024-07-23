@@ -58,7 +58,7 @@ $ ls -ltr filename.o
 
 ## Step 5: Display Assembly Code
 
-```
+
 Display the optimized assembly code for the main function:
 
 ```
