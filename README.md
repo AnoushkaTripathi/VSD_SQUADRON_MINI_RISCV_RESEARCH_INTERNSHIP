@@ -67,6 +67,7 @@ $ riscv64-unknown-elf-objdump -d filename.o | less
 ```
 
 ![image](https://github.com/user-attachments/assets/1f6443e6-c0cb-43b0-8a76-5777b7b6f82c)
+# TASK 2
 # Understanding Binary Neural Network 
 Reference https://neptune.ai/blog/binarized-neural-network-bnn-and-its-implementation-in-ml
 
