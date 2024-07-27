@@ -70,10 +70,27 @@ $ riscv64-unknown-elf-objdump -d filename.o | less
 # TASK 2
 # Understanding Binary Neural Network 
 Reference https://neptune.ai/blog/binarized-neural-network-bnn-and-its-implementation-in-ml
+## Binarized Neural Network (BNN)
 
-Binarized Neural Network (BNN) comes from a paper by Courbariaux, Hubara, Soudry, El-Yaniv, and Bengio from 2016. It introduced a new method to train neural networks, where weights and activations are binarized at train time and then used to compute the gradients. This way, memory size is reduced, and bitwise operations improve power efficiency. GPUs consume huge amounts of power, making it difficult for neural networks to be trained on low-power devices. BNNs can reduce power consumption by more than 32 times.
+Binarized Neural Networks (BNNs) were introduced in a 2016 paper by Courbariaux, Hubara, Soudry, El-Yaniv, and Bengio. This innovative approach involves training neural networks with binarized weights and activations.
 
-The paper showed that a binary matrix multiplication could be used to reduce the train time, which made it possible to train BNN on MNIST 7 times faster, achieving near state-of-the-art results.
+### Key Points of BNNs:
+
+1. **Binarization of Weights and Activations:**
+   - During training, weights and activations are binarized to either -1 or 1. This reduces the memory needed to store these values compared to floating-point numbers.
+   
+2. **Efficiency Improvements:**
+   - The binarized values enable the use of bitwise operations instead of complex arithmetic operations. Bitwise operations are much faster and consume less power.
+   - This results in improved power efficiency, essential for training neural networks on low-power devices like mobile phones and embedded systems. BNNs can reduce power consumption by over 32 times compared to traditional neural networks.
+
+3. **Faster Training:**
+   - The paper demonstrated that binary matrix multiplication can significantly speed up the training process. For instance, training a BNN on the MNIST dataset was shown to be 7 times faster than traditional methods while still achieving near state-of-the-art results.
+
+### Benefits of BNNs:
+
+- **Reduced Memory Usage:** Using binary values significantly reduces the neural network's memory footprint.
+- **Increased Speed:** Simpler binary operations enable faster computation.
+- **Lower Power Consumption:** Bitwise operations lead to lower power usage, making BNNs suitable for low-power devices.
 
 ### Deterministic Function
 ![image](https://github.com/user-attachments/assets/af0d9f49-3acf-4674-89af-df84ad771271)
@@ -82,17 +99,18 @@ The paper showed that a binary matrix multiplication could be used to reduce the
 ![image](https://github.com/user-attachments/assets/53f07cec-0207-4d36-8502-c7a5b6d40cdd)
 ## Key Aspects of BNNs
 
-### Real-valued weights for optimizers
-For optimizers to work, you need real-valued weights, so they’re accumulated in real-valued variables. Even though we use binarized weights/activations, we use real-valued weights for optimization.
+### Real-valued Weights for Optimizers
+Although BNNs use binarized weights and activations during training, real-valued weights are still necessary for optimizers to function effectively. These real-valued weights are accumulated in real-valued variables, enabling the optimization process.
 
 ### Saturated Straight-Through Estimator (STE)
-When using deterministic or stochastic functions for binarization, the derivative of these functions is zero, which makes the whole gradient zero. Saturated STE substitutes the derivative of the signum function with 1 when \( x \leq 1 \), effectively canceling out the gradient when \( x \) is too large.
+When using deterministic or stochastic functions for binarization, their derivatives are zero, resulting in zero gradients. To address this, the Saturated STE substitutes the derivative of the signum function with 1 when \( x \leq 1 \), effectively preventing the gradient from vanishing when \( x \) is too large.
 
 ### Shift-based Batch Normalization and AdaMax Optimization
-BNNs use shift-based methods as alternatives to regular BatchNormalization and Adamax optimization to save time by using bitwise operations. The BNN paper claims no accuracy loss when replacing Batch Normalization and Adam optimizer with shift-based Batch Normalization and shift-based Adam optimizer.
+BNNs utilize shift-based methods as alternatives to conventional Batch Normalization and AdaMax optimization. These methods leverage bitwise operations to save time. The BNN paper asserts that replacing Batch Normalization and the Adam optimizer with shift-based Batch Normalization and shift-based Adam optimizer does not result in accuracy loss.
 
-### Speeding up the Training
-The BNN paper introduced methods to speed up the GPU implementation of BNNs, increasing time efficiency even more than using cuBLAS. One such method is SWAR (Single Instruction, Multiple Data Within a Register), which concatenates 32-binary variables to 32-bit registers, allowing evaluation of these 32 connections in just 6 clock cycles on an Nvidia GPU. This results in a theoretical speed improvement of \( \frac{32}{6} = 5.3 \) times.
+### Speeding Up the Training
+The BNN paper introduced techniques to further accelerate GPU implementations of BNNs, achieving greater efficiency than using cuBLAS. One notable technique is SWAR (Single Instruction, Multiple Data Within a Register), which concatenates 32 binary variables into 32-bit registers. This allows 32 connections to be evaluated in just 6 clock cycles on an Nvidia GPU, resulting in a theoretical speed improvement of \( \frac{32}{6} = 5.3 \) times.
+
 
 ## Performance Stats
 ![image](https://github.com/user-attachments/assets/e24eb032-c586-41cf-9f13-090c0e2fcc62)
