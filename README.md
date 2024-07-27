@@ -244,9 +244,12 @@ int main(int argc, char* argv[])
 ```
 ![image](https://github.com/user-attachments/assets/4b4ac4ad-6e43-48a9-a1a1-1d0c1e68ae05)
 
-![image](https://github.com/user-attachments/assets/4082041b-22f4-4291-9066-ce8dffa55900)
 
-![image](https://github.com/user-attachments/assets/62b0d9d0-f7ea-49ad-aef7-504eac6d25c3)
+## Acknowledgements
+
+ - [Kunal Ghosh,Co-Founder at VLSI System Design](https://www.linkedin.com/in/kunal-ghosh-vlsisystemdesign-com-28084836/)
+ - [Yusuke Shinyama](https://github.com/euske)
+ - [RISC-V](https://www.linkedin.com/company/risc-v-international/posts/?feedView=all)
 
 
 
