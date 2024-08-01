@@ -248,6 +248,173 @@ int main(int argc, char* argv[])
 
 ![image](https://github.com/user-attachments/assets/ac528eb5-21c4-4e68-bc16-4320206bf7c9)
 
+# TASK 3 :  RISC V Instruction Types
+
+## "Decoding RISC-V Instructions: A Visual Guide"
+### "Understanding I-Type, S-Type, B-Type, U-Type, and J-Type Instructions"
+
+  ## Introduction Section:
+
+
+RISC-V (Reduced Instruction Set Computer - V) is an open standard instruction set architecture (ISA) based on established reduced instruction set computing principles. Unlike proprietary ISAs, RISC-V is free and open, enabling unrestricted academic and commercial use without licensing fees. This has made RISC-V an attractive option for research, education, and industry applications, fostering innovation and development across various domains.
+
+### Importance of Understanding Instruction Formats
+
+Understanding instruction formats is crucial for several reasons:
+
+1. **Instruction Decoding**: Knowing the structure of different instruction formats enables the correct decoding of instructions, which is essential for the CPU to execute them correctly.
+
+2. **Pipeline Design**: Instruction formats impact the design of the CPU pipeline. Proper handling of instruction formats ensures efficient instruction fetch, decode, execution, memory access, and write-back stages.
+
+3. **Compiler Design**: Compilers generate machine code that adheres to the ISA's instruction formats. A deep understanding of these formats helps in optimizing code generation, leading to better performance and efficiency.
+
+4. **Debugging and Verification**: Understanding instruction formats aids in debugging and verifying hardware and software. It helps in identifying issues related to incorrect instruction execution or pipeline hazards.
+
+5. **Extensibility and Customization**: RISC-V's modular and extensible nature allows for custom extensions. Understanding the base instruction formats is essential for creating and integrating custom instructions tailored to specific applications or performance needs.
+
+
+### RISC-V R-Type Instructions
+
+R-type instructions are used for operations that involve only registers. These instructions typically perform arithmetic, logical, and shift operations.
+
+#### Format: 
+```
+opcode | rd | funct3 | rs1 | rs2 | funct7
+```
+
+- **opcode**: Specifies the operation (e.g., 0110011 for integer register-register operations).
+- **rd**: Destination register.
+- **funct3**: Further specifies the operation.
+- **rs1**: First source register.
+- **rs2**: Second source register.
+- **funct7**: Further specifies the operation.
+
+### Example: ADD rd, rs1, rs2
+Adds the values in `rs1` and `rs2`, and stores the result in `rd`.
+
+- **opcode**: 0110011
+- **funct3**: 000
+- **funct7**: 0000000
+- **Binary Encoding**: `0000000 rs2 rs1 000 rd 0110011`
+
+### Examples of R-type Instructions with Encodings
+
+#### ADD (Addition)
+- **Instruction**: `add a5, a0, a5`
+- **Machine Code**: `00f507b3`
+- **Binary Encoding**: `0000000 01010 00000 000 01010 0110011`
+  ```
+  opcode:  0110011
+  funct3:  000
+  funct7:  0000000
+  ```
+
+#### SUB (Subtraction)
+- **Instruction**: `sub a4, a4, a5`
+- **Machine Code**: `40f70733`
+- **Binary Encoding**: `0100000 01010 01000 000 01000 0110011`
+  ```
+  opcode:  0110011
+  funct3:  000
+  funct7:  1000000
+  ```
+
+#### AND (Bitwise AND)
+- **Instruction**: `and t3, t3, s4`
+- **Machine Code**: `014e7e33`
+- **Binary Encoding**: `0000001 01010 01110 111 01110 0110011`
+  ```
+  opcode:  0110011
+  funct3:  111
+  funct7:  0000001
+  ```
+
+#### OR (Bitwise OR)
+- **Instruction**: `or a7, a7, a2`
+- **Machine Code**: `00c8e8b3`
+- **Binary Encoding**: `0000000 00101 01110 101 01110 0110011`
+  ```
+  opcode:  0110011
+  funct3:  101
+  funct7:  0000000
+  ```
+
+#### XOR (Bitwise XOR)
+- **Instruction**: `xor s0, s0, a5`
+- **Machine Code**: `00f44433`
+- **Binary Encoding**: `0000000 01010 01000 100 01000 0110011`
+  ```
+  opcode:  0110011
+  funct3:  100
+  funct7:  0000000
+  ```
+
+### Detailed Explanation of Fields
+
+- **opcode**: A 7-bit field that specifies the type of operation.
+- **rd**: A 5-bit field that specifies the destination register where the result of the operation will be stored.
+- **funct3**: A 3-bit field that provides additional specification of the operation.
+- **rs1**: A 5-bit field that specifies the first source register.
+- **rs2**: A 5-bit field that specifies the second source register.
+- **funct7**: A 7-bit field that further specifies the operation, often used to differentiate between similar operations.
+
+
+### I-Type Instructions
+**Format**: opcode | rd | funct3 | rs1 | imm[11:0]
+![image](https://github.com/user-attachments/assets/3d035720-dc62-45d5-9a2c-2a6b263ade74)
+
+**Example: ADDI rd, rs1, imm**
+- **opcode**: 0010011 (for immediate arithmetic operations)
+- **funct3**: 000 (for ADDI)
+- **imm**: Immediate value
+- **rs1**: Source register 1
+- **rd**: Destination register
+
+### S-Type Instructions
+**Format**: opcode | imm[11:5] | funct3 | rs1 | rs2 | imm[4:0]
+
+![image](https://github.com/user-attachments/assets/eb224238-c0ef-42ca-82d0-c42ed8293320)
+
+**Example: SW rs2, imm(rs1)**
+- **opcode**: 0100011 (for store operations)
+- **funct3**: 010 (for SW)
+- **imm**: Immediate value (split into imm[11:5] and imm[4:0])
+- **rs1**: Base address register
+- **rs2**: Source register to be stored
+
+### B-Type Instructions
+**Format**: opcode | imm[12] | imm[10:5] | funct3 | rs1 | rs2 | imm[4:1] | imm[11]
+
+![image](https://github.com/user-attachments/assets/7f138e24-cb0c-4506-9875-c4b3b14a2670)
+
+**Example: BEQ rs1, rs2, imm**
+- **opcode**: 1100011 (for branch operations)
+- **funct3**: 000 (for BEQ)
+- **imm**: Immediate value (split into imm[12], imm[10:5], imm[4:1], imm[11])
+- **rs1**: Source register 1
+- **rs2**: Source register 2
+
+### U-Type Instructions
+**Format**: opcode | rd | imm[31:12]
+
+![image](https://github.com/user-attachments/assets/d6269585-d85a-4675-b13f-4ae4ed1ea05a)
+
+**Example: LUI rd, imm**
+- **opcode**: 0110111 (for LUI)
+- **imm**: Upper 20 bits of the immediate value
+- **rd**: Destination register
+
+### J-Type Instructions
+**Format**: opcode | rd | imm[20] | imm[10:1] | imm[11] | imm[19:12]
+
+![image](https://github.com/user-attachments/assets/9b35cad7-8fd8-41da-be46-aec4cf712657)
+
+**Example: JAL rd, imm**
+- **opcode**: 1101111 (for JAL)
+- **imm**: Immediate value (split into imm[20], imm[10:1], imm[11], imm[19:12])
+- **rd**: Destination register (stores the return address)
+
+
 
 
 
