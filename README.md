@@ -342,7 +342,9 @@ R-type instructions are used for operations that involve only registers. These i
 - **opcode**: 1101111 (for JAL)
 - **imm**: Immediate value (split into imm[20], imm[10:1], imm[11], imm[19:12])
 - **rd**: Destination register (stores the return address)
+![image](https://github.com/user-attachments/assets/2cddc2cf-975d-4a5a-83c6-7f4d3f61747f)
 
+![image](https://github.com/user-attachments/assets/3d7e38dc-576c-48ff-9ea3-49d817b18586)
 
 
 
