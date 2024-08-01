@@ -278,9 +278,8 @@ Understanding instruction formats is crucial for several reasons:
 R-type instructions are used for operations that involve only registers. These instructions typically perform arithmetic, logical, and shift operations.
 
 #### Format: 
-```
-opcode | rd | funct3 | rs1 | rs2 | funct7
-```
+![image](https://github.com/user-attachments/assets/e01d8bbe-710e-4927-8fec-51f162d384ca)
+
 
 - **opcode**: Specifies the operation (e.g., 0110011 for integer register-register operations).
 - **rd**: Destination register.
@@ -289,78 +288,10 @@ opcode | rd | funct3 | rs1 | rs2 | funct7
 - **rs2**: Second source register.
 - **funct7**: Further specifies the operation.
 
-### Example: ADD rd, rs1, rs2
-Adds the values in `rs1` and `rs2`, and stores the result in `rd`.
-
-- **opcode**: 0110011
-- **funct3**: 000
-- **funct7**: 0000000
-- **Binary Encoding**: `0000000 rs2 rs1 000 rd 0110011`
-
-### Examples of R-type Instructions with Encodings
-
-#### ADD (Addition)
-- **Instruction**: `add a5, a0, a5`
-- **Machine Code**: `00f507b3`
-- **Binary Encoding**: `0000000 01010 00000 000 01010 0110011`
-  ```
-  opcode:  0110011
-  funct3:  000
-  funct7:  0000000
-  ```
-
-#### SUB (Subtraction)
-- **Instruction**: `sub a4, a4, a5`
-- **Machine Code**: `40f70733`
-- **Binary Encoding**: `0100000 01010 01000 000 01000 0110011`
-  ```
-  opcode:  0110011
-  funct3:  000
-  funct7:  1000000
-  ```
-
-#### AND (Bitwise AND)
-- **Instruction**: `and t3, t3, s4`
-- **Machine Code**: `014e7e33`
-- **Binary Encoding**: `0000001 01010 01110 111 01110 0110011`
-  ```
-  opcode:  0110011
-  funct3:  111
-  funct7:  0000001
-  ```
-
-#### OR (Bitwise OR)
-- **Instruction**: `or a7, a7, a2`
-- **Machine Code**: `00c8e8b3`
-- **Binary Encoding**: `0000000 00101 01110 101 01110 0110011`
-  ```
-  opcode:  0110011
-  funct3:  101
-  funct7:  0000000
-  ```
-
-#### XOR (Bitwise XOR)
-- **Instruction**: `xor s0, s0, a5`
-- **Machine Code**: `00f44433`
-- **Binary Encoding**: `0000000 01010 01000 100 01000 0110011`
-  ```
-  opcode:  0110011
-  funct3:  100
-  funct7:  0000000
-  ```
-
-### Detailed Explanation of Fields
-
-- **opcode**: A 7-bit field that specifies the type of operation.
-- **rd**: A 5-bit field that specifies the destination register where the result of the operation will be stored.
-- **funct3**: A 3-bit field that provides additional specification of the operation.
-- **rs1**: A 5-bit field that specifies the first source register.
-- **rs2**: A 5-bit field that specifies the second source register.
-- **funct7**: A 7-bit field that further specifies the operation, often used to differentiate between similar operations.
 
 
 ### I-Type Instructions
-**Format**: opcode | rd | funct3 | rs1 | imm[11:0]
+
 ![image](https://github.com/user-attachments/assets/3d035720-dc62-45d5-9a2c-2a6b263ade74)
 
 **Example: ADDI rd, rs1, imm**
@@ -371,7 +302,6 @@ Adds the values in `rs1` and `rs2`, and stores the result in `rd`.
 - **rd**: Destination register
 
 ### S-Type Instructions
-**Format**: opcode | imm[11:5] | funct3 | rs1 | rs2 | imm[4:0]
 
 ![image](https://github.com/user-attachments/assets/eb224238-c0ef-42ca-82d0-c42ed8293320)
 
@@ -383,7 +313,6 @@ Adds the values in `rs1` and `rs2`, and stores the result in `rd`.
 - **rs2**: Source register to be stored
 
 ### B-Type Instructions
-**Format**: opcode | imm[12] | imm[10:5] | funct3 | rs1 | rs2 | imm[4:1] | imm[11]
 
 ![image](https://github.com/user-attachments/assets/7f138e24-cb0c-4506-9875-c4b3b14a2670)
 
@@ -395,7 +324,7 @@ Adds the values in `rs1` and `rs2`, and stores the result in `rd`.
 - **rs2**: Source register 2
 
 ### U-Type Instructions
-**Format**: opcode | rd | imm[31:12]
+
 
 ![image](https://github.com/user-attachments/assets/d6269585-d85a-4675-b13f-4ae4ed1ea05a)
 
@@ -405,7 +334,7 @@ Adds the values in `rs1` and `rs2`, and stores the result in `rd`.
 - **rd**: Destination register
 
 ### J-Type Instructions
-**Format**: opcode | rd | imm[20] | imm[10:1] | imm[11] | imm[19:12]
+
 
 ![image](https://github.com/user-attachments/assets/9b35cad7-8fd8-41da-be46-aec4cf712657)
 
