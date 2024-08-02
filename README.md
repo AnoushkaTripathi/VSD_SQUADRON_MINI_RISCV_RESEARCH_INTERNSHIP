@@ -528,6 +528,27 @@ U-Type instructions are used for operations like loading upper immediate (LUI) a
 - **imm**: Immediate value (split into imm[20], imm[10:1], imm[11], imm[19:12])
 - **rd**: Destination register (stores the return address)
 
+### Machine Code for `addi sp, sp, -128`
+
+#### Instruction: `addi sp, sp, -128`
+- **Opcode:** 0010011 (7 bits)
+- **Immediate:** -128 (12 bits, two's complement)
+- **Source Register (rs1):** sp (x2, 5 bits)
+- **Destination Register (rd):** sp (x2, 5 bits)
+- **Function (funct3):** 000 (3 bits)
+
+#### Breakdown:
+- **Immediate (-128):** `111111110000`
+- **rs1 (sp = x2):** `00010`
+- **funct3:** `000`
+- **rd (sp = x2):** `00010`
+- **Opcode:** `0010011`
+### Machine Code Breakdown for `addi sp, sp, -128`
+
+| Immediate (12 bits) | rs1 (5 bits) | funct3 (3 bits) | rd (5 bits) | Opcode (7 bits) |
+|---------------------|--------------|-----------------|-------------|-----------------|
+| 111111110000        | 00010        | 000             | 00010       | 0010011         |
+
 
 
 
