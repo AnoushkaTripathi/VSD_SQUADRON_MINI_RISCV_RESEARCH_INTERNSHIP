@@ -337,26 +337,7 @@ The RISC-V instructions are categorized into types based on their field organiza
   - Example: I-type instructions use a 12-bit immediate value field along with source and destination registers.
 - **Registers**: Specified in fields such as rd (destination register), rs1 (source register 1), and rs2 (source register 2).
 
-## Assembly to Machine Code Translation
 
-### Assembly Language Statement
-
-An assembly statement like `add x1, x2, x3` specifies an operation (add) and operands (x1, x2, x3).
-
-### Encoding Process
-
-This statement is translated into machine code by encoding the operation into the opcode, func3, and func7 fields, and the operands into the register fields.
-
-### Machine Code Execution
-
-When the machine encounters this instruction, it decodes the fields to perform the specified operation, using the specified registers and immediate values.
-
-## Instruction Set Encoding
-
-### Usage Template Column
-
-The usage template column links the parameters in assembly language instructions to their encoded fields in machine language.
-- Example: In U-type instructions, the immediate value from the assembly code is placed in the instruction’s immediate field.
 
 ### Example - U-Type Instruction
 
@@ -397,15 +378,7 @@ Consider the `lui` (Load Upper Immediate) instruction:
 - **AUIPC**: Add upper immediate to PC.
   - Example: `AUIPC rd, imm` (rd = PC + imm << 12)
 
-## Execution Cycle
 
-A CPU executes instructions in a cycle:
-
-1. **Fetch**: Retrieve the instruction from memory.
-2. **Decode**: Determine the operation and operands.
-3. **Execute**: Perform the operation.
-4. **Write-back**: Store the result in the destination register.
-5. **Update PC**: Move to the next instruction.
 
 ## Branch and Jump Instructions
 
