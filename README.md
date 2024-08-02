@@ -586,7 +586,98 @@ U-Type instructions are used for operations like loading upper immediate (LUI) a
 | 0000011            | 01000        | 00010        | 011             | 10000             | 0100011         |
 
 ![image](https://github.com/user-attachments/assets/ac5766fd-7b6d-4b2f-afdb-a66c8fb92b70)
+**mv a5, a0**
+### Machine Code for `mv a5, a0`
 
+#### Instruction: `mv a5, a0`
+- **Opcode:** 0010011 (7 bits)
+- **Immediate:** 0 (12 bits)
+- **Source Register (rs1):** a0 (x10, 5 bits)
+- **Destination Register (rd):** a5 (x15, 5 bits)
+- **Function (funct3):** 000 (3 bits)
+
+#### Breakdown:
+- **Immediate (0):** `000000000000`
+- **rs1 (a0 = x10):** `01010`
+- **funct3:** `000`
+- **rd (a5 = x15):** `01111`
+- **Opcode:** `0010011`
+     ```
+     imm[11:0]  | rs1  | funct3 | rd   | opcode
+     000000000000 | 01000 | 000   | 10111 | 0010011
+     ```
+
+
+     ### Machine Code for `ld a0, -32(s0)`
+
+#### Instruction: `ld a0, -32(s0)`
+- **Opcode:** 0000011 (7 bits)
+- **Immediate:** -32 (12 bits, two's complement)
+- **Source Register (rs1):** s0 (x8, 5 bits)
+- **Destination Register (rd):** a0 (x10, 5 bits)
+- **Function (funct3):** 011 (3 bits)
+
+#### Breakdown:
+- **Immediate (-32):** `111111000000`
+- **rs1 (s0 = x8):** `01000`
+- **funct3:** `011`
+- **rd (a0 = x10):** `01010`
+- **Opcode:** `0000011`
+
+  ### Machine Code for `lui a5, 0x24`
+
+#### Instruction: `lui a5, 0x24`
+- **Opcode:** 0110111 (7 bits)
+- **Immediate:** 0x24 (20 bits)
+- **Destination Register (rd):** a5 (x15, 5 bits)
+
+#### Breakdown:
+- **Immediate (20 bits):** `00000000000000000000 00100100`
+- **rd (a5 = x15):** `01111`
+- **Opcode:** `0110111`
+
+#### Machine Code:
+- **Binary:** `00000000000000000000 01111 0110111`
+- **Hex:** `000247b7`
+
+### Machine Code for `sw a5, -116(s0)`
+
+#### Instruction: `sw a5, -116(s0)`
+- **Opcode:** 0100011 (7 bits)
+- **Immediate:** -116 (split into 7 bits and 5 bits)
+- **Source Register 1 (rs1):** s0 (x8, 5 bits)
+- **Source Register 2 (rs2):** a5 (x15, 5 bits)
+- **Function (funct3):** 010 (3 bits)
+
+#### Breakdown:
+- **Immediate [11:5] (-116):** `1111100`
+- **rs2 (a5 = x15):** `01111`
+- **rs1 (s0 = x8):** `01000`
+- **funct3:** `010`
+- **Immediate [4:0] (-116):** `00000`
+- **Opcode:** `0100011`
+
+#### Machine Code:
+- **Binary:** `1111100 01111 01000 010 00000 0100011`
+- **Hex:** `f8f42623`
+
+ ### Machine Code for `ld a0, -32(s0)`
+
+#### Instruction: `ld a0, -32(s0)`
+- **Opcode:** 0000011 (7 bits)
+- **Immediate:** -32 (12 bits, two's complement)
+- **Source Register (rs1):** s0 (x8, 5 bits)
+- **Destination Register (rd):** a0 (x10, 5 bits)
+- **Function (funct3):** 011 (3 bits)
+
+#### Breakdown:
+- **Immediate (-32):** `111111000000`
+- **rs1 (s0 = x8):** `01000`
+- **funct3:** `011`
+- **rd (a0 = x10):** `01010`
+- **Opcode:** `0000011`
+
+   
 
 ## Acknowledgements
 
