@@ -585,6 +585,7 @@ U-Type instructions are used for operations like loading upper immediate (LUI) a
 |--------------------|--------------|--------------|-----------------|-------------------|-----------------|
 | 0000011            | 01000        | 00010        | 011             | 10000             | 0100011         |
 
+![image](https://github.com/user-attachments/assets/ac5766fd-7b6d-4b2f-afdb-a66c8fb92b70)
 
 
 ## Acknowledgements
