@@ -2,7 +2,7 @@
 
 ![image](https://github.com/user-attachments/assets/0f0091ae-8a07-4903-ac24-8c1342084913)
 
-# TASK 1: Installing the required programmes for this internship, such as Ubuntu on VMBox, Visual C++, and writing an example of C code along with evaluating RISC assembly code for the sample C code, are the tasks at hand.
+### TASK 1: Installing the required programmes for this internship, such as Ubuntu on VMBox, Visual C++, and writing an example of C code along with evaluating RISC assembly code for the sample C code, are the tasks at hand.
 
 ![image](https://github.com/user-attachments/assets/c86b50ba-21c3-4b82-bd27-182e47afad11)
 
