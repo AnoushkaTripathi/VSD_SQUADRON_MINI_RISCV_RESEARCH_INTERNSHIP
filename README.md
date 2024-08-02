@@ -97,19 +97,7 @@ Binarized Neural Networks (BNNs) were introduced in a 2016 paper by Courbariaux,
 
 ### Stochastic Function
 ![image](https://github.com/user-attachments/assets/53f07cec-0207-4d36-8502-c7a5b6d40cdd)
-## Key Aspects of BNNs
 
-### Real-valued Weights for Optimizers
-Although BNNs use binarized weights and activations during training, real-valued weights are still necessary for optimizers to function effectively. These real-valued weights are accumulated in real-valued variables, enabling the optimization process.
-
-### Saturated Straight-Through Estimator (STE)
-When using deterministic or stochastic functions for binarization, their derivatives are zero, resulting in zero gradients. To address this, the Saturated STE substitutes the derivative of the signum function with 1 when \( x \leq 1 \), effectively preventing the gradient from vanishing when \( x \) is too large.
-
-### Shift-based Batch Normalization and AdaMax Optimization
-BNNs utilize shift-based methods as alternatives to conventional Batch Normalization and AdaMax optimization. These methods leverage bitwise operations to save time. The BNN paper asserts that replacing Batch Normalization and the Adam optimizer with shift-based Batch Normalization and shift-based Adam optimizer does not result in accuracy loss.
-
-### Speeding Up the Training
-The BNN paper introduced techniques to further accelerate GPU implementations of BNNs, achieving greater efficiency than using cuBLAS. One notable technique is SWAR (Single Instruction, Multiple Data Within a Register), which concatenates 32 binary variables into 32-bit registers. This allows 32 connections to be evaluated in just 6 clock cycles on an Nvidia GPU, resulting in a theoretical speed improvement of \( \frac{32}{6} = 5.3 \) times.
 
 
 ## Performance Stats
@@ -757,9 +745,15 @@ U-Type instructions are used for operations like loading upper immediate (LUI) a
       101111101111| 00001 | 1101111
       ```       
 
-15.  **jal     ra,11024 <Layer_learnOutputs>**
-      
-## Acknowledgements
+15.  ** jal  ra,11024 <Layer_learnOutputs>**
+      - **Immediate (20 bits)**: `00101011 100000 0 0`
+      - **rd (ra = x1)**: `00001`
+      - **Opcode**: `1101111`
+        ```
+        imm[20|10:1|11|19:12] | rd | opcode
+         0 0001000000 1 00101011 | 00001 | 1101111
+        ```
+## Acknowledgement
 
  - [Kunal Ghosh,Co-Founder at VLSI System Design](https://www.linkedin.com/in/kunal-ghosh-vlsisystemdesign-com-28084836/)
  - [Yusuke Shinyama](https://github.com/euske)
