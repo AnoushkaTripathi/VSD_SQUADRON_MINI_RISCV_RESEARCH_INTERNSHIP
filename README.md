@@ -726,6 +726,64 @@ U-Type instructions are used for operations like loading upper immediate (LUI) a
         imm[20|10:1|11|19:12] | rd | opcode
          0 0001000000 1 00101011 | 00001 | 1101111
         ```
+
+   # TASK 4 
+### Use this RISC-V Core Verilog netlist and testbench for functional simulation experiment. Upload waveform snapshots for the commands on your GitHub. Reference GitHub repo is here. 
+
+1. Clone the Reference Repository
+First, clone the repository that contains the Verilog netlist and testbench:
+
+```
+      $ git clone https://github.com/vinayrayapati/rv32i.git my_riscv_project
+      
+      $ cd my_riscv_project
+```
+  ![image](https://github.com/user-attachments/assets/25847ed9-c379-4e39-b2be-db5512e830af)
+2. Set Up Simulation Tools (iverilog and GTKWave)
+Install Icarus Verilog and GTKWave for Verilog simulation and waveform viewing.
+```
+      $ sudo apt update
+      
+      $ sudo apt install iverilog gtkwave
+
+       $ nano iiitb_rv32i_tb.v
+```
+3. Edit the Testbench File:
+Open the testbench file in a text editor:
+![image](https://github.com/user-attachments/assets/380333f5-503a-4b80-84f2-7a240d014de2)
+Make sure that above testbench have this code included
+```
+
+  $dumpfile("simulation.vcd"); // Name of the VCD file
+
+  $dumpvars(0, testbench); // Dump all signals of the testbench module
+```
+4. Run the Functional Simulation
+Signals and instantiation of the design
+
+Compile and Simulate:
+```
+    $ iverilog -o rv32i_simulation iiitb_rv32i.v iiitb_rv32i_tb.v
+    
+    $ vvp rv32i_simulation
+
+```
+![image](https://github.com/user-attachments/assets/b642d240-4242-42a7-8123-f737328102a4)
+
+View the Waveform
+```
+    $ gtkwave simulation.vcd
+```
+![image](https://github.com/user-attachments/assets/a0df4d1f-edb3-4b0a-a091-96d0d8a886e6)
+![image](https://github.com/user-attachments/assets/499aee1f-6459-49d4-ab45-01bcd3afb5db)
+
+## OUTPUT 
+### ADD
+![image](https://github.com/user-attachments/assets/7af1f45f-1206-4131-94f4-e801ca606c91)
+### ADDI
+![image](https://github.com/user-attachments/assets/74309059-0f63-4ae8-9f09-8ca2eedf4a49)
+### SUB
+
 ## Acknowledgement
 
  - [Kunal Ghosh,Co-Founder at VLSI System Design](https://www.linkedin.com/in/kunal-ghosh-vlsisystemdesign-com-28084836/)
