@@ -250,7 +250,55 @@ int main(int argc, char* argv[])
 
 # TASK 3 :  RISC V Instruction Types
 ![image](https://github.com/user-attachments/assets/f63f8c64-e8d8-417d-a962-03f09df16fe9)
+
+
 As a part of this Internship I completed this course offered by Kunal Ghosh sir, VLSI SYSTEM DESIGN.
+### SECTION 1  From Apps to Hardware
+
+![image](https://github.com/user-attachments/assets/c36062ee-4fd3-43e1-86d7-27856af2fed7)
+
+### RISC V OPERANDS
+
+![image](https://github.com/user-attachments/assets/6e1c1788-6c29-4811-b469-521e9be1346a)
+
+
+
+Operands are essential components in any instruction. For example, consider the operation `a = b + c`, where `a`, `b`, and `c` are operands. In this case, `b` and `c` are the source operands, and `a` is the destination operand. These operands need to be stored physically somewhere within the computer, and we typically have three options:
+![image](https://github.com/user-attachments/assets/2cddc2cf-975d-4a5a-83c6-7f4d3f61747f)
+
+![image](https://github.com/user-attachments/assets/3d7e38dc-576c-48ff-9ea3-49d817b18586)
+1. **Registers**
+2. **Memory**
+3. **Constants**
+
+### Registers
+Registers are small, fast storage locations within the CPU, typically built from flip-flops or a register file. They provide quick access to data compared to memory. Memory, which is often built from SRAM or DRAM, has a larger capacity but slower access times. Constants, or immediates, are values embedded directly within the instructions themselves.
+
+### RISC-V Registers
+RISC-V, a popular open-source instruction set architecture, has 32 registers, each 32 bits wide. These registers provide much faster data access than memory. The RISC-V architecture is known as a 32-bit architecture because it primarily operates on 32-bit data. There is also a 64-bit version of RISC-V where registers are 64 bits wide, allowing for 64-bit data operations.
+
+**Design Principle 3: Smaller is Faster**
+The design philosophy behind RISC-V includes having a small number of registers (32) to ensure the system is not limited by register access time, thus enabling faster computation. The number of registers is chosen carefully to balance speed and storage capacity.
+
+### Register Naming in RISC-V
+The 32 registers in RISC-V are named `x0` to `x31`. However, they are often referred to by more descriptive names to indicate their typical usage:
+
+- **x0 (zero)**: Always holds the constant value 0.
+- **x1 (ra)**: Return Address, used to store the return address after a function call.
+- **x2 (sp)**: Stack Pointer, points to the top of the stack in memory.
+- **x3 (gp)**: Global Pointer.
+- **x4 (tp)**: Thread Pointer.
+
+### Saved, Temporary, and Argument Registers
+The remaining registers are categorized as saved registers (`s`), temporary registers (`t`), and argument registers (`a`):
+
+- **Saved Registers (s0-s11)**: Used to store variables that must retain their values across function calls. (x8, x9, x18-x27)
+- **Temporary Registers (t0-t6)**: Used for intermediate calculations and temporary data.
+- **Argument Registers (a0-a7)**: Used for passing arguments to functions and storing return values.
+
+
+![image](https://github.com/user-attachments/assets/af936f03-ded7-4d6a-9e4b-38cf37695620)
+
 
 
 ### ABI : Application Binary Interface
@@ -349,9 +397,7 @@ R-type instructions are used for operations that involve only registers. These i
 - **opcode**: 1101111 (for JAL)
 - **imm**: Immediate value (split into imm[20], imm[10:1], imm[11], imm[19:12])
 - **rd**: Destination register (stores the return address)
-![image](https://github.com/user-attachments/assets/2cddc2cf-975d-4a5a-83c6-7f4d3f61747f)
 
-![image](https://github.com/user-attachments/assets/3d7e38dc-576c-48ff-9ea3-49d817b18586)
 
 
 
