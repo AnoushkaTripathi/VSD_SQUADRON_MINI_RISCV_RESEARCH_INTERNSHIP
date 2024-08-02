@@ -554,6 +554,37 @@ U-Type instructions are used for operations like loading upper immediate (LUI) a
 
 ![image](https://github.com/user-attachments/assets/51869d32-1bc8-45b6-b559-9682c34ed699)
 
+### Machine Code for `sd s0, 112(sp)`
+
+*sd (Store Doubleword):* This instruction stores a 64-bit value from a source register into memory.
+
+#### Instruction: `sd s0, 112(sp)`
+- **Opcode:** 0100011 (7 bits)
+- **Immediate:** 112 (12 bits, split into two parts: imm[11:5] and imm[4:0])
+- **Source Register (rs2):** s0 (x8, 5 bits)
+- **Base Register (rs1):** sp (x2, 5 bits)
+- **Function (funct3):** 011 (3 bits)
+
+#### Breakdown:
+- **Immediate (112):** `000001110000` (split into imm[11:5] = `0000011` and imm[4:0] = `10000`)
+- **rs2 (s0 = x8):** `01000`
+- **rs1 (sp = x2):** `00010`
+- **funct3:** `011`
+- **Opcode:** `0100011`
+
+#### Binary Representation:
+- imm[11:5] (7 bits): `0000011`
+- rs2 (5 bits): `01000`
+- rs1 (5 bits): `00010`
+- funct3 (3 bits): `011`
+- imm[4:0] (5 bits): `10000`
+- Opcode (7 bits): `0100011`
+### Machine Code Breakdown for `sd s0, 112(sp)`
+
+| imm[11:5] (7 bits) | rs2 (5 bits) | rs1 (5 bits) | funct3 (3 bits) | imm[4:0] (5 bits) | Opcode (7 bits) |
+|--------------------|--------------|--------------|-----------------|-------------------|-----------------|
+| 0000011            | 01000        | 00010        | 011             | 10000             | 0100011         |
+
 
 
 ## Acknowledgements
