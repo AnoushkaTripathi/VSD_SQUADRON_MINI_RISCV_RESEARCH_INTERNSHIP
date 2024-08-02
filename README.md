@@ -253,9 +253,6 @@ int main(int argc, char* argv[])
 
 
 As a part of this Internship I completed this course offered by Kunal Ghosh sir, VLSI SYSTEM DESIGN.
-### SECTION 1  From Apps to Hardware
-
-![image](https://github.com/user-attachments/assets/c36062ee-4fd3-43e1-86d7-27856af2fed7)
 
 ### RISC V OPERANDS
 
@@ -327,6 +324,115 @@ Understanding instruction formats is crucial for several reasons:
 
 5. **Extensibility and Customization**: RISC-V's modular and extensible nature allows for custom extensions. Understanding the base instruction formats is essential for creating and integrating custom instructions tailored to specific applications or performance needs.
 
+# BASICS
+
+ ## Instruction Types and Fields
+
+The RISC-V instructions are categorized into types based on their field organization. Each type has specific fields like opcode, func3, func7, immediate values, and register numbers. The types include:
+
+- **R-type**: Register type
+- **I-type**: Immediate type
+- **S-type**: Store type
+- **B-type**: Branch type
+- **U-type**: Upper immediate type
+- **J-type**: Jump type
+
+## Opcode and Function Fields
+
+- **Opcode**: Determines the type of instruction.
+- **func3** and **func7**: Further specify the operation within the instruction type.
+  - Example: In R-type instructions, func3 and func7 differentiate between operations like addition and subtraction.
+
+## Immediate Values and Registers
+
+- **Immediate Values**: Encoded in specific fields within the instruction.
+  - Example: I-type instructions use a 12-bit immediate value field along with source and destination registers.
+- **Registers**: Specified in fields such as rd (destination register), rs1 (source register 1), and rs2 (source register 2).
+
+## Assembly to Machine Code Translation
+
+### Assembly Language Statement
+
+An assembly statement like `add x1, x2, x3` specifies an operation (add) and operands (x1, x2, x3).
+
+### Encoding Process
+
+This statement is translated into machine code by encoding the operation into the opcode, func3, and func7 fields, and the operands into the register fields.
+
+### Machine Code Execution
+
+When the machine encounters this instruction, it decodes the fields to perform the specified operation, using the specified registers and immediate values.
+
+## Instruction Set Encoding
+
+### Usage Template Column
+
+The usage template column links the parameters in assembly language instructions to their encoded fields in machine language.
+- Example: In U-type instructions, the immediate value from the assembly code is placed in the instruction’s immediate field.
+
+### Example - U-Type Instruction
+
+Consider the `lui` (Load Upper Immediate) instruction:
+
+- **Assembly**: `lui x5, 0x12345`
+- **Encoding**: The immediate value `0x12345` is placed in the instruction’s immediate field, and the destination register `x5` is specified in the rd field.
+- **Machine Execution**: The machine loads the upper 20 bits of the immediate value into the upper 20 bits of register `x5`.
+
+   ## Arithmetic Instructions
+
+- **ADD**: Adds values in two registers and stores the result in a third register.
+  - Example: `ADD rd, rs1, rs2` (rd = rs1 + rs2)
+- **ADDI**: Adds a register and an immediate value (constant) and stores the result.
+  - Example: `ADDI rd, rs1, imm` (rd = rs1 + imm)
+
+## Logical Instructions
+
+- **AND, OR, XOR**: Perform bitwise operations.
+  - Example: `AND rd, rs1, rs2` (rd = rs1 & rs2)
+
+## Branch Instructions
+
+- **BEQ**: Branch if equal.
+  - Example: `BEQ rs1, rs2, offset` (if rs1 == rs2, PC = PC + offset)
+- **BNE**: Branch if not equal.
+  - Example: `BNE rs1, rs2, offset` (if rs1 != rs2, PC = PC + offset)
+
+## Load and Store Instructions
+
+- **LW**: Load word from memory.
+  - Example: `LW rd, offset(rs1)` (rd = memory[rs1 + offset])
+- **SW**: Store word to memory.
+  - Example: `SW rs1, offset(rs2)` (memory[rs2 + offset] = rs1)
+
+## Special Instructions
+
+- **AUIPC**: Add upper immediate to PC.
+  - Example: `AUIPC rd, imm` (rd = PC + imm << 12)
+
+## Execution Cycle
+
+A CPU executes instructions in a cycle:
+
+1. **Fetch**: Retrieve the instruction from memory.
+2. **Decode**: Determine the operation and operands.
+3. **Execute**: Perform the operation.
+4. **Write-back**: Store the result in the destination register.
+5. **Update PC**: Move to the next instruction.
+
+## Branch and Jump Instructions
+
+- **Jump (J)**: Unconditional branch to a specified address.
+- **Branch (B)**: Conditional branch based on a comparison.
+
+## RV32I Extensions
+
+RISC-V allows optional extensions for additional functionality:
+
+- **M**: Integer multiplication and division.
+- **A**: Atomic instructions.
+- **F, D, Q**: Floating-point operations (32-bit, 64-bit, 128-bit).
+- **C**: Compressed instructions.
+
 
 ### RISC-V R-Type Instructions
 
@@ -346,6 +452,17 @@ R-type instructions are used for operations that involve only registers. These i
 
 
 ### I-Type Instructions
+I-Type instructions cover various operations, including immediate arithmetic, load operations, and certain control flow instructions.
+
+### Extracting Immediate Value
+
+- The immediate value spans bits [31:20].
+- To extract this value:
+  - Mask the instruction to isolate the relevant bits.
+  - Perform a right shift to align the immediate value to the least significant bits (LSBs).
+- **Example**: If the instruction value is `0x12345678`, the immediate value is extracted as follows:
+  ```cpp
+  uint32_t imm_i = (instruction & 0xFFF00000) >> 20;
 
 ![image](https://github.com/user-attachments/assets/3d035720-dc62-45d5-9a2c-2a6b263ade74)
 
@@ -379,6 +496,19 @@ R-type instructions are used for operations that involve only registers. These i
 - **rs2**: Source register 2
 
 ### U-Type Instructions
+U-Type instructions are used for operations like loading upper immediate (LUI) and adding upper immediate to PC (AUIPC).
+
+### Extracting Immediate Value
+
+- The immediate value in U-type instructions spans bits [31:12].
+- To extract this value, you can mask the instruction with `0xFFFFF000`.
+- **Example**: If the instruction value is `0x12345000`, applying the mask will yield `0x12345000`.
+
+### Encoding and Usage
+
+- The immediate value extracted directly forms part of the U-type instruction.
+  - For **LUI**, this value is loaded into the destination register.
+  - For **AUIPC**, this value is added to the current PC.
 
 
 ![image](https://github.com/user-attachments/assets/d6269585-d85a-4675-b13f-4ae4ed1ea05a)
