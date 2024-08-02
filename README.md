@@ -529,6 +529,8 @@ U-Type instructions are used for operations like loading upper immediate (LUI) a
 - **rd**: Destination register (stores the return address)
 
 ### Machine Code for `addi sp, sp, -128`
+![image](https://github.com/user-attachments/assets/f0e7f858-5ca8-46f6-b42f-40133048e731)
+
 
 #### Instruction: `addi sp, sp, -128`
 - **Opcode:** 0010011 (7 bits)
@@ -550,6 +552,7 @@ U-Type instructions are used for operations like loading upper immediate (LUI) a
 | 111111110000        | 00010        | 000             | 00010       | 0010011         |
 
 
+![image](https://github.com/user-attachments/assets/51869d32-1bc8-45b6-b559-9682c34ed699)
 
 
 
