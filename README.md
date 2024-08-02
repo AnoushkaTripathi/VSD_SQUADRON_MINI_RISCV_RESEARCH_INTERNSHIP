@@ -681,7 +681,7 @@ U-Type instructions are used for operations like loading upper immediate (LUI) a
       111111000000 | 01000 | 011   | 01010 | 0000011
       ```
 
-  8.  ### Machine Code for `jal ra, 1038c <Layer_create>`
+8.  ### Machine Code for `jal ra, 1038c <Layer_create>`
 
 #### Instruction: `jal ra, 1038c <Layer_create>`
 - **Opcode:** 1101111 (7 bits)
