@@ -1193,6 +1193,8 @@ On each positive edge of `clk`:
 - `SLL`: Shift left logical.
 - `SRL`: Shift right logical.
 
+![download](https://github.com/user-attachments/assets/372dfaee-0185-43c6-9051-9280b940a75e)
+
 
 
 </details>
