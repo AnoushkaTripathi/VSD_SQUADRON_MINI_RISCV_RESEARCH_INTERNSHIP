@@ -727,6 +727,8 @@ U-Type instructions are used for operations like loading upper immediate (LUI) a
          0 0001000000 1 00101011 | 00001 | 1101111
         ```
 <details>
+
+ 
    # RV32I Pipeline Processor
 
    ```
@@ -1194,6 +1196,8 @@ On each positive edge of `clk`:
 
 
 </details>
+
+
    # TASK 4 
 ### Use this RISC-V Core Verilog netlist and testbench for functional simulation experiment. Upload waveform snapshots for the commands on your GitHub. Reference GitHub repo is here. 
 
