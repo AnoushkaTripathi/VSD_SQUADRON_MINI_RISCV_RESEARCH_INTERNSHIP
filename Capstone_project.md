@@ -163,4 +163,4 @@ uint32_t GetMicrosecondsFromTimer() {
 - **Function**: Retrieves the timer counter value and converts it to microseconds.
 
 
-```
+
