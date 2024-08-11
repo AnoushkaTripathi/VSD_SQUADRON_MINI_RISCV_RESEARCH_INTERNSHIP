@@ -164,13 +164,3 @@ uint32_t GetMicrosecondsFromTimer() {
 
 
 ```
-# C/C++ Testbench
-
-![image](https://github.com/AnoushkaTripathi/NIELIT-INTERNSHIP-ON-HLS-PROGRAMMING/assets/98522737/fefdf1ab-71f0-4fed-9d7b-14fe6ec5e7d5)
-
-## Verification 
-
-In this course we will learn simulation based verification
-
-
-![image](https://github.com/AnoushkaTripathi/NIELIT-INTERNSHIP-ON-HLS-PROGRAMMING/assets/98522737/7246fac8-e4fe-4fc1-83a4-e09cffae5e98)
