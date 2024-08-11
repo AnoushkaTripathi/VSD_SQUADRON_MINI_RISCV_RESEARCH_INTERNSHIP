@@ -1,7 +1,7 @@
 
 
 
-# Low-Pass Filter Implementation on CH32V00x Microcontroller
+# Low-Pass Filter Implementation on VSD SQUADRON MINI
 
 This code demonstrates how to implement a low-pass filter using a CH32V00x microcontroller. It reads data from an Analog-to-Digital Converter (ADC), applies the filter, and sends the results via UART for communication.
 
