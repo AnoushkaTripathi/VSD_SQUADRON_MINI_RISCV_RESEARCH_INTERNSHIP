@@ -131,7 +131,8 @@ void loop() {
 
 ## Demonstration
 ![image](https://github.com/user-attachments/assets/d6d1c810-8801-4106-b9ff-d8a0b17b39da)
-Pinout
+
+## Pinout
 ![image](https://github.com/user-attachments/assets/8f5b3be2-21f7-4997-993e-82a5f0386ff1)
 To provide a clear pinout for the code that reads analog data from a sensor and calculates a moving average, here’s the information you would include:
 
