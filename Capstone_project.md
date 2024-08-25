@@ -130,6 +130,7 @@ void loop() {
    The filter enhances the accuracy of sensor readings, which is crucial for applications like environmental monitoring, robotics, and more.
 
 ## Demonstration
+![image](https://github.com/user-attachments/assets/d6d1c810-8801-4106-b9ff-d8a0b17b39da)
 
 To see the code in action:
 
