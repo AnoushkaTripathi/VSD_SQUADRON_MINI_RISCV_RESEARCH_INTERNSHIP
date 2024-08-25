@@ -174,7 +174,12 @@ You can experiment with the code by changing the value of `numReadings` to see h
 
 Feel free to contribute by suggesting improvements or by modifying the code for different applications.
 
-Link to Video  https://www.youtube.com/watch?v=ZP_NPAF4MaI
+
+**Link to Video**
+[YouTube Video]( https://www.youtube.com/watch?v=ZP_NPAF4MaI)
+
+
+
 **Author:**  
 Er. Anoushka Tripathi
 
