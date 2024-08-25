@@ -1,166 +1,157 @@
+# Moving Average Filter with VSD Squadron MINI
+This repository contains an example of how to implement a moving average filter using Arduino. The moving average filter is a simple yet effective way to smooth out noisy sensor data, making it easier to work with and more accurate.
 
-
-
-# Low-Pass Filter Implementation on VSD SQUADRON MINI
-
-This code demonstrates how to implement a low-pass filter using a CH32V00x microcontroller. It reads data from an Analog-to-Digital Converter (ADC), applies the filter, and sends the results via UART for communication.
-
-## Components
-
-1. **LowPass Class**
-2. **USART Configuration**
-3. **Timer Configuration**
-4. **ADC Handling**
-5. **Main Functionality**
-
-### 1. LowPass Class
-
-#### Purpose
-
-The `LowPass` class implements a first-order low-pass filter using fixed-point arithmetic.
-
-#### Constructor
+## Code Overview
 
 ```cpp
-LowPass(uint16_t f0, uint16_t fs) {
-    float omega0 = 2.0f * 3.14159265f * f0 / fs;
-    float alpha = omega0 / (omega0 + 1);
-    a1 = static_cast<int16_t>(-(1.0f - alpha) * 10000);
-    b0 = static_cast<int16_t>(alpha * 10000);
-    b1 = b0;
+const int numReadings = 35;
+int readings[numReadings];
+int readIndex = 0;
+int total = 0;
+int average = 0;
+
+void setup() {
+  Serial.begin(115200);
+  for (int thisReading = 0; thisReading < numReadings; thisReading++) {
+    readings[thisReading] = 0;
+  }
 }
-```
 
-- **`f0`**: Cutoff frequency.
-- **`fs`**: Sampling frequency.
-- **Coefficients Calculation**: Computes the filter coefficients `a1`, `b0`, and `b1` based on the cutoff and sampling frequencies. These coefficients are scaled for fixed-point arithmetic.
+void loop() {
+  total = total - readings[readIndex];
+  readings[readIndex] = analogRead(A1);
+  Serial.print(readings[readIndex]);
+  Serial.print(",");
+  total = total + readings[readIndex];
+  readIndex = readIndex + 1;
 
-#### Method `filt`
+  if (readIndex >= numReadings) {
+    readIndex = 0;
+  }
 
-```cpp
-int16_t filt(int16_t xn) {
-    int16_t yn = a1 * y1 + b0 * xn + b1 * x1;
-    x1 = xn;
-    y1 = yn;
-    return yn;
+  average = total / numReadings;
+  Serial.println(average);
+  delay(15);
 }
-```
 
-- **Inputs and Outputs**:
-  - `xn`: Current input sample.
-  - `yn`: Filtered output.
-- **Function**: Applies the filter to the input sample and returns the filtered result.
 
-### 2. USART Configuration
 
-#### Function `USARTx_CFG`
+## Explanation
 
-```cpp
-void USARTx_CFG(void) {
-    // GPIO and USART initialization
-}
-```
+### Variables
 
-- **Purpose**: Configures the USART1 peripheral for serial communication.
-- **Steps**:
-  - Initializes GPIO pins for USART TX and RX.
-  - Sets USART parameters like baud rate, word length, stop bits, and mode.
-  - Enables interrupts and sets priority for USART communication.
+- **`const int numReadings = 35;`**  
+  This constant defines the number of readings we will average. A higher number results in a smoother output but can also introduce a slight lag.
 
-### 3. Timer Configuration
+- **`int readings[numReadings];`**  
+  This array stores the last 35 sensor readings.
 
-#### Function `Timer2_Init`
+- **`int readIndex = 0;`**  
+  `readIndex` keeps track of where the current reading will be stored in the array.
 
-```cpp
-void Timer2_Init() {
-    TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
-    // Timer configuration
-}
-```
+- **`int total = 0;`**  
+  `total` holds the sum of all the readings, which is used to calculate the average.
 
-- **Purpose**: Configures Timer2 for microsecond timing.
-- **Steps**:
-  - Initializes Timer2 with a prescaler to achieve a 1 MHz frequency, providing 1 µs resolution.
+- **`int average = 0;`**  
+  This variable stores the calculated average value.
 
-### 4. ADC Handling
-
-#### `setup` Function
+### `setup()` Function
 
 ```cpp
 void setup() {
-    USARTx_CFG();   // Setup UART for communication
-    Timer2_Init();  // Initialize Timer 2 for microseconds timing
-
-    // Configure ADC
-    ADC_ITConfig(ADC1, ADC_IT_EOC, ENABLE); // Assuming you're setting up the ADC
+  Serial.begin(115200);
+  for (int thisReading = 0; thisReading < numReadings; thisReading++) {
+    readings[thisReading] = 0;
+  }
 }
 ```
 
-- **Purpose**: Initializes UART and Timer2. Configures ADC to generate interrupts when conversion is complete.
+- **`Serial.begin(115200);`**  
+  Initializes the serial communication at a baud rate of 115200, allowing us to monitor the output in the Serial Monitor.
 
-#### `loop` Function
+- **Initialization Loop:**  
+  The `for` loop initializes the `readings` array to zero, ensuring that we start with a clean slate before taking any sensor readings.
+
+### `loop()` Function
 
 ```cpp
 void loop() {
-    ADC_SoftwareStartInjectedConvCmd(ADC1, ENABLE); // Start ADC conversion
+  total = total - readings[readIndex];
+  readings[readIndex] = analogRead(A1);
+  Serial.print(readings[readIndex]);
+  Serial.print(",");
+  total = total + readings[readIndex];
+  readIndex = readIndex + 1;
 
-    while (!adcFlag) {} // Wait for ADC conversion to complete
+  if (readIndex >= numReadings) {
+    readIndex = 0;
+  }
 
-    uint16_t analogValue = ADC_GetInjectedConversionValue(ADC1, ADC_InjectedChannel_1);
-
-    // Convert ADC reading to corresponding input signal (adjust based on your circuit)
-    int16_t xn = (int16_t)(((analogValue * 325) / 1023 - 2503) * 1000 / 185);
-
-    // Compute the filtered signal
-    int16_t yn = lp.filt(xn);
-
-    // Output the results
-    char buffer[50];
-    itoa(xn, buffer, 10);
-    strcat(buffer, ", ");
-    itoa(yn, buffer + strlen(buffer), 10);
-    strcat(buffer, "\r\n");
-    UartBufferSend((uint8_t*)buffer, strlen(buffer));
-
-    Delay_Ms(200); // Replace with a suitable delay function
+  average = total / numReadings;
+  Serial.println(average);
+  delay(15);
 }
 ```
 
-- **Purpose**: Performs ADC conversions, applies the low-pass filter to the data, and sends the results via UART.
-- **Steps**:
-  - Starts ADC conversion.
-  - Waits for conversion to complete.
-  - Reads and converts ADC value to an integer.
-  - Applies the filter to the converted value.
-  - Formats and sends the filtered data via UART.
-  - Adds a delay to regulate the loop execution rate.
+- **Subtract Old Reading:**  
+  The old reading at `readIndex` is subtracted from the total to remove its effect on the average.
 
-### 5. Utility Functions
+- **New Reading:**  
+  A new analog reading is taken from pin `A1` and stored in the `readings` array at the current `readIndex`.
 
-#### `UartBufferSend`
+- **Print Reading:**  
+  The new reading is printed to the Serial Monitor.
 
-```cpp
-void UartBufferSend(uint8_t* buffer, uint16_t length) {
-    for(uint16_t i = 0; i < length; i++) {
-        while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
-        USART_SendData(USART1, buffer[i]);
-    }
-}
-```
+- **Update Total:**  
+  The new reading is added to the total, updating the sum for the average calculation.
 
-- **Purpose**: Sends data through UART.
-- **Function**: Transmits each byte of data, waiting for the transmit buffer to be empty before sending the next byte.
+- **Increment Index:**  
+  `readIndex` is incremented to move to the next position in the array. If `readIndex` exceeds the array size, it wraps around to zero.
 
-#### `GetMicrosecondsFromTimer`
+- **Calculate Average:**  
+  The average is calculated by dividing the `total` by `numReadings`. This smoothed value is printed to the Serial Monitor.
 
-```cpp
-uint32_t GetMicrosecondsFromTimer() {
-    return TIM_GetCounter(TIM2) * (1.0 / (SystemCoreClock / 1000000));
-}
-```
+- **Delay:**  
+  A short delay of 15 milliseconds is added to control the speed of the loop.
 
-- **Purpose**: Returns the current time in microseconds based on Timer2.
-- **Function**: Retrieves the timer counter value and converts it to microseconds.
+## Advantages of the Moving Average Filter
+
+1. **Noise Reduction:**  
+   The filter reduces random noise by averaging multiple readings, resulting in a more stable output.
+
+2. **Simplicity:**  
+   It's easy to implement and understand, making it a great choice for beginners and quick projects.
+
+3. **Real-Time Smoothing:**  
+   Provides real-time smoothing with minimal computational overhead, which is ideal for embedded systems like Arduino.
+
+4. **Improved Accuracy:**  
+   The filter enhances the accuracy of sensor readings, which is crucial for applications like environmental monitoring, robotics, and more.
+
+## Demonstration
+
+To see the code in action:
+
+1. Connect a sensor to analog pin `A1` on your Arduino.
+2. Upload the code to your Arduino.
+3. Open the Serial Monitor in the Arduino IDE.
+4. Observe the raw sensor readings and the smoothed average values.
+
+## Further Exploration
+
+You can experiment with the code by changing the value of `numReadings` to see how it affects the filter's smoothness. A higher number of readings will result in a smoother output but may also introduce a slight lag in the response.
+
+
+
+Feel free to contribute by suggesting improvements or by modifying the code for different applications.
+
+
+**Author:**  
+Er. Anoushka Tripathi
+
+**Contact:**  
+[LinkedIn](https://www.linkedin.com/in/anoushkastripathi/)
+
 
 
 
