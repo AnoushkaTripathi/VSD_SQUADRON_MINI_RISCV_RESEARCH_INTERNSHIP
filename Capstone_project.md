@@ -1,5 +1,5 @@
-# Moving Average Filter with VSD Squadron MINI
-This repository contains an example of how to implement a moving average filter using VSD Squadron MINI. The moving average filter is a simple yet effective way to smooth out noisy sensor data, making it easier to work with and more accurate.
+# Moving Average Filter with VSDSquadron MINI
+This repository contains an example of how to implement a moving average filter using VSDSquadron MINI. The moving average filter is a simple yet effective way to smooth out noisy sensor data, making it easier to work with and more accurate.
 ![image](https://github.com/user-attachments/assets/a573cdd6-82fa-41ef-884b-a9111ecd85c9)
 
 ## Code Overview
