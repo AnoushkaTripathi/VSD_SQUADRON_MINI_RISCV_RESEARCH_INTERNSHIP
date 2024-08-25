@@ -131,6 +131,32 @@ void loop() {
 
 ## Demonstration
 ![image](https://github.com/user-attachments/assets/d6d1c810-8801-4106-b9ff-d8a0b17b39da)
+Pinout
+![image](https://github.com/user-attachments/assets/8f5b3be2-21f7-4997-993e-82a5f0386ff1)
+To provide a clear pinout for the code that reads analog data from a sensor and calculates a moving average, here’s the information you would include:
+
+### **Pinout for Moving Average Filter Code with Current Sensor**
+
+#### **VSD Squadron Mini Connections:**
+
+- **A1 (Analog Input Pin):**
+  - **Connected to:** Output of the current sensor.
+  - **Function:** Reads the analog voltage corresponding to the current measurement from the sensor.
+
+- **GND (Ground Pin):**
+  - **Connected to:** Ground pin of the current sensor.
+  - **Function:** Provides a common ground reference between the Arduino and the sensor.
+
+- **VCC (Power Pin, typically 5V or 3.3V depending on the sensor):**
+  - **Connected to:** Power supply pin of the current sensor.
+  - **Function:** Supplies power to the sensor.
+
+#### **Serial Monitor:**
+- **Used for:** Viewing the raw sensor data and the moving average value in real-time.
+
+
+- **Current Sensor:** Connect the sensor's output to A1, ground to GND, and VCC to the appropriate power pin on the Arduino.
+  
 
 To see the code in action:
 
@@ -147,7 +173,7 @@ You can experiment with the code by changing the value of `numReadings` to see h
 
 Feel free to contribute by suggesting improvements or by modifying the code for different applications.
 
-
+Link to Video  https://www.youtube.com/watch?v=ZP_NPAF4MaI
 **Author:**  
 Er. Anoushka Tripathi
 
