@@ -164,7 +164,7 @@ To provide a clear pinout for the code that reads analog data from a sensor and 
 To see the code in action:
 
 1. Connect a sensor to analog pin `A1` on your VSD Squadron MINI.
-2. Upload the code to your Arduino.
+2. Upload the code to your VSD Squadron MINI.
 3. Open the Serial Monitor in the Arduino IDE.
 4. Observe the raw sensor readings and the smoothed average values.
 
