@@ -1,5 +1,5 @@
 # Moving Average Filter with VSD Squadron MINI
-This repository contains an example of how to implement a moving average filter using Arduino. The moving average filter is a simple yet effective way to smooth out noisy sensor data, making it easier to work with and more accurate.
+This repository contains an example of how to implement a moving average filter using VSD Squadron MINI. The moving average filter is a simple yet effective way to smooth out noisy sensor data, making it easier to work with and more accurate.
 
 ## Code Overview
 
