@@ -140,7 +140,7 @@ To provide a clear pinout for the code that reads analog data from a sensor and 
 
 ### **Pinout for Moving Average Filter Code with Current Sensor**
 
-#### **VSD Squadron Mini Connections:**
+#### **VSDSquadron Mini Connections:**
 
 - **A1 (Analog Input Pin):**
   - **Connected to:** Output of the current sensor.
@@ -148,7 +148,7 @@ To provide a clear pinout for the code that reads analog data from a sensor and 
 
 - **GND (Ground Pin):**
   - **Connected to:** Ground pin of the current sensor.
-  - **Function:** Provides a common ground reference between the Arduino and the sensor.
+  - **Function:** Provides a common ground reference between the VSDSquadron mini and the sensor.
 
 - **VCC (Power Pin, typically 5V or 3.3V depending on the sensor):**
   - **Connected to:** Power supply pin of the current sensor.
@@ -158,7 +158,7 @@ To provide a clear pinout for the code that reads analog data from a sensor and 
 - **Used for:** Viewing the raw sensor data and the moving average value in real-time.
 
 
-- **Current Sensor:** Connect the sensor's output to A1, ground to GND, and VCC to the appropriate power pin on the Arduino.
+- **Current Sensor:** Connect the sensor's output to A1, ground to GND, and VCC to the appropriate power pin on the VSDSquadron mini .
   
 
 To see the code in action:
