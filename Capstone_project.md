@@ -123,7 +123,7 @@ void loop() {
    It's easy to implement and understand, making it a great choice for beginners and quick projects.
 
 3. **Real-Time Smoothing:**  
-   Provides real-time smoothing with minimal computational overhead, which is ideal for embedded systems like Arduino.
+   Provides real-time smoothing with minimal computational overhead, which is ideal for embedded systems like VSD Squadron MINI.
 
 4. **Improved Accuracy:**  
    The filter enhances the accuracy of sensor readings, which is crucial for applications like environmental monitoring, robotics, and more.
@@ -132,7 +132,7 @@ void loop() {
 
 To see the code in action:
 
-1. Connect a sensor to analog pin `A1` on your Arduino.
+1. Connect a sensor to analog pin `A1` on your VSD Squadron MINI.
 2. Upload the code to your Arduino.
 3. Open the Serial Monitor in the Arduino IDE.
 4. Observe the raw sensor readings and the smoothed average values.
