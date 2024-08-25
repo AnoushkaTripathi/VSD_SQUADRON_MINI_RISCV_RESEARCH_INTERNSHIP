@@ -136,6 +136,8 @@ void loop() {
 ![image](https://github.com/user-attachments/assets/8f5b3be2-21f7-4997-993e-82a5f0386ff1)
 To provide a clear pinout for the code that reads analog data from a sensor and calculates a moving average, here’s the information you would include:
 
+![image](https://github.com/user-attachments/assets/883c56a5-3c2a-488f-9151-969bfb3dfaf0)
+
 ### **Pinout for Moving Average Filter Code with Current Sensor**
 
 #### **VSD Squadron Mini Connections:**
